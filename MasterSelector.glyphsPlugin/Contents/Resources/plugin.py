@@ -3,15 +3,16 @@
 ###########################################################################################################
 #
 #
-#	General Plugin
+#	Master Selector Plugin
 #
-#	Read the docs:
-#	https://github.com/schriftgestalt/GlyphsSDK/tree/master/Python%20Templates/General%20Plugin
+#	With this plugin you can navigate multi-master Glyphs Files more easily.
+#	Slider included.
 #
+#	Benedikt Bramboeck, 2018
 #
 ###########################################################################################################
 
-
+from GlyphsApp import *
 from GlyphsApp.plugins import *
 from vanilla import *
 
@@ -19,13 +20,13 @@ from vanilla import *
 
 class MasterSelectorWindow(GeneralPlugin):
 	def settings(self):
-		self.name = Glyphs.localize({'en': u'Master Selector'})
+		self.name = 'Master Selector'
 	
 	def start(self):
 		try: 
-			# new API in Glyphs 2.3.1-910
+			targetMenu = WINDOW_MENU
 			newMenuItem = NSMenuItem(self.name, self.showWindow)
-			Glyphs.menu[WINDOW_MENU].append(newMenuItem)
+			Glyphs.menu[targetMenu].append(newMenuItem)
 		except:
 			mainMenu = Glyphs.mainMenu()
 			s = objc.selector(self.showWindow,signature='v@:@')
@@ -34,32 +35,30 @@ class MasterSelectorWindow(GeneralPlugin):
 			mainMenu.itemWithTag_(5).submenu().addItem_(newMenuItem)
 	
 	def showWindow(self, sender):
-		
-		mastersList = []
-		for m in Glyphs.font.masters:
-			mastersList.append(m.name)
-		currentMasterIndex = Glyphs.font.masterIndex
+		if Glyphs.font is None:
+			print "Master Selector: Please open a font first"
+		else:
+			mastersList = []
+			for m in Glyphs.font.masters:
+				mastersList.append(m.name)
+			currentMasterIndex = Glyphs.font.masterIndex
 
-		self.windowWidth = 200
-		self.windowHeight = 25*len(mastersList)+23+30
-
-		self.w = FloatingWindow((self.windowWidth, self.windowHeight), "Master Selector")
-		
-		
-		#self.w.masters = PopUpButton((spX, spY*2+edY, -spX, edY), mastersList, callback=self.changeMaster)
-		self.w.radiomasters = RadioGroup((10, 10, -10, 25*len(mastersList)),
-                                mastersList,
-                                callback=self.changeMaster)
-		self.w.slider = Slider((10, -35, -10, 23),
-                            tickMarkCount=len(mastersList),
-                            stopOnTickMarks = True,
-                            value = currentMasterIndex,
-                            minValue = 0,
-                            maxValue = len(mastersList)-1,
-                            sizeStyle = "small",
-                            callback=self.changeMasterSlider)
-
-		self.w.open()
+			self.windowWidth = 200
+			self.windowHeight = 25*len(mastersList)+23+30
+			self.w = FloatingWindow((self.windowWidth, self.windowHeight), "Master Selector")
+			self.w.radiomasters = RadioGroup((10, 10, -10, 25*len(mastersList)),
+	                                mastersList,
+	                                callback=self.changeMaster)
+			self.w.slider = Slider((10, -35, -10, 23),
+	                            tickMarkCount=len(mastersList),
+	                            stopOnTickMarks = True,
+	                            value = currentMasterIndex,
+	                            minValue = 0,
+	                            maxValue = len(mastersList)-1,
+	                            sizeStyle = "small",
+	                            callback=self.changeMasterSlider)
+			
+			self.w.open()
 
 	def changeMaster(self, sender):
 		currentChoice = self.w.radiomasters.get()
