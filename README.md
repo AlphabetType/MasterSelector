@@ -1,5 +1,5 @@
 # MasterSelector
-While working on more than one master in GlyphsApp, Master Selector helps you find the master you are looking for. It displays the names of each master, complementing the master icons in the top left corner of the Glyphs window. This can be particularly helpful when designing layering fonts and working in non-standard master setups.
+Master Selector helps you navigate your masters and find the one you are looking. It displays the name of each master in the file, complementing the icons in the top left corner of Glyphs’ UI window. Especially when designing layer fonts and working in unconventional master setups this plugin has proven to be helpful.
 
 ## How to use
 *Master Selector* can be found in the Window Menu of GlyphsApp. Either choose a master from the list, or use the slider to find the right one.
