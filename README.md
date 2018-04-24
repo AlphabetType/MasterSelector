@@ -1,4 +1,4 @@
-# MasterSelector
+# Master Selector
 Master Selector helps you navigate your masters and find the one you are looking. It displays the name of each master in the file, complementing the icons in the top left corner of Glyphs’ UI window. Especially when designing layer fonts and working in unconventional master setups this plugin has proven to be helpful.
 
 ## How to use
