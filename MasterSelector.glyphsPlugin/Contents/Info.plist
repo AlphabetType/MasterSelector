@@ -17,11 +17,15 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleVersion</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1</string>
+	<string>0.2</string>
+	<key>UpdateFeedURL</key>
+	<string>https://raw.githubusercontent.com/AlphabetType/MasterSelector/master/MasterSelector.glyphsPlugin/Contents/Info.plist</string>
+	<key>productPageURL</key>
+	<string>https://github.com/AlphabetType/MasterSelector</string>
 	<key>productReleaseNotes</key>
-	<string>First Release</string>
+	<string>Synced slider with the list, added additional error windows, users will now be notified about new updates.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright, Benedikt Bramböck, 2018</string>
 	<key>NSPrincipalClass</key>
