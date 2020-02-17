@@ -53,12 +53,12 @@ class MasterSelectorWindow(GeneralPlugin):
 	                                callback=self.changeMaster)
 			self.w.slider = Slider((10, -35, -10, 23),
 	                            tickMarkCount=len(mastersList),
-	                            stopOnTickMarks = True,
-	                            value = currentMasterIndex,
-	                            minValue = 0,
-	                            maxValue = len(mastersList)-1,
-	                            sizeStyle = "small",
-								continuous= False,
+	                            stopOnTickMarks=True,
+	                            value=currentMasterIndex,
+	                            minValue=0,
+	                            maxValue=len(mastersList)-1,
+	                            sizeStyle="small",
+				    continuous=False,
 	                            callback=self.changeMasterSlider)
 			
 			self.w.open()
