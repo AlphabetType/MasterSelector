@@ -1,4 +1,5 @@
 # encoding: utf-8
+from __future__ import division, print_function, unicode_literals
 
 ###########################################################################################################
 #
@@ -12,20 +13,22 @@
 #
 ###########################################################################################################
 
+import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
 from vanilla import *
 
-
-
 class MasterSelectorWindow(GeneralPlugin):
+	
+	@objc.python_method
 	def settings(self):
 		self.name = 'Master Selector'
 	
+	@objc.python_method
 	def start(self):
 		try: 
 			targetMenu = WINDOW_MENU
-			newMenuItem = NSMenuItem(self.name, self.showWindow)
+			newMenuItem = NSMenuItem(self.name, self.showWindow_)
 			Glyphs.menu[targetMenu].append(newMenuItem)
 		except:
 			mainMenu = Glyphs.mainMenu()
@@ -34,7 +37,7 @@ class MasterSelectorWindow(GeneralPlugin):
 			newMenuItem.setTarget_(self)
 			mainMenu.itemWithTag_(5).submenu().addItem_(newMenuItem)
 	
-	def showWindow(self, sender):
+	def showWindow_(self, sender):
 		if Glyphs.font is None:
 			self.helperWindow("Please open a font first.")
 		elif len(Glyphs.font.masters) < 2:
@@ -63,34 +66,35 @@ class MasterSelectorWindow(GeneralPlugin):
 			
 			self.w.open()
 
+	@objc.python_method
 	def helperWindow(self, message):
-		self.w = FloatingWindow((200, 80), "Master Selector")
-		self.w.error = TextBox((10,10,-10,20), message, alignment="center")
-		self.w.button = Button((10,40,-10,20), "Close", self.closeWindow)
-		self.w.open()
+		Message(
+			title="Master Selector",
+			message=message,
+			OKButton=None,
+			)
 
-	def closeWindow(self,sender):
-		self.w.close()
-
+	@objc.python_method
 	def changeMaster(self, sender):
 		currentChoice = self.w.radiomasters.get()
 		try:
 			Glyphs.font.parent.windowController().setMasterIndex_(currentChoice)
 			self.w.slider.set(currentChoice)
 		except:
-			print 'BROKEN'
+			print('BROKEN')
 			pass
 
+	@objc.python_method
 	def changeMasterSlider(self, sender):
 		currentChoice = int(self.w.slider.get())
 		try:
 			Glyphs.font.parent.windowController().setMasterIndex_(currentChoice)
 			self.w.radiomasters.set(currentChoice)
 		except:
-			print 'BROKEN'
+			print('BROKEN')
 			pass
 
-
+	@objc.python_method
 	def __file__(self):
 		"""Please leave this method unchanged"""
 		return __file__
