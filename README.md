@@ -9,7 +9,7 @@ Master Selector helps you navigate your masters and find the one you are looking
 Master Selector can be found in the *Window* Menu of GlyphsApp. Either choose a master from the list, or use the slider to find the right one.
 
 ## Known Issues
-- Slider view and button view are not synchronized (yet).
+- Master Selector window is not updated when master is changed through GlyphsApp buttons (or shortcuts).
 
 ## Pull requests
 Feel free to comment or pull requests for any improvements.
